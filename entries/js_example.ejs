@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    P = document.getElementById("example");
+    if (P) {
+        P.innerHTML = P.innerHTML
+            .replace(/(\&nbsp\;)/g, "\ ")
+            .replace(/(\u00A0)/g, "<br>")
+            .replace(/(\.\<br\>)/g,"\. ")
+            .replace(/(\b{{text:Subject}}\w*?\b)/ig, "<b>$1</b>"); /* Auto Bold */
+    }
+</script>

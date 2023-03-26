@@ -1,0 +1,44 @@
+<div class="f">
+    <%- include('../entries/status_bar', {title: "FILLING"}); %>
+
+    {{#Question}}
+    <br>
+    <div class="paraphrase theme-border-left">{{Question}}</div>
+    <%- include('../entries/js_main'); %>
+    <script type="text/javascript">
+        run("paraphrase", true, "pos theme-bg", "{{text:Question}}");
+        run("extension", true, "pos2 theme-border", "{{text:Question}}");
+        P = document.getElementById("example");
+        if (P) {
+            P.innerHTML = P.innerHTML
+                .replace(/(\&nbsp\;)/g, "\ ")
+                .replace(/(\u00A0)/g, "<br>")
+                .replace(/(\.\<br\>)/g,"\. ")
+        }
+    </script>
+    {{/Question}}
+
+    <br>
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+
+    <div><span class="word">{{type:Answer}}</span></div>
+
+    <br>
+    {{#Pronunciation_Back}}
+    <div>
+        <hr class="hr_short theme-bg"/>
+        <span class="play-button theme-bg">{{Pronunciation_Back}}</span>
+        <hr class="hr_short theme-bg"/>
+    </div>
+    {{/Pronunciation_Back}}
+    {{^Pronunciation_Back}}
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    {{/Pronunciation_Back}}
+
+    <%- include('../entries/extension'); %>
+    <%- include('../entries/example'); %>
+</div>

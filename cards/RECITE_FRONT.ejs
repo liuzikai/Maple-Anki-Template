@@ -1,0 +1,18 @@
+{{#Has_Recite}}
+<div class="r">
+    <%- include('../entries/status_bar', {title: "RECITE"}); %>
+    <%- include('../entries/subject'); %>
+    <%- include('../entries/pronunciation'); %>
+    <%- include('../entries/paraphrase'); %>
+    <%- include('../entries/extension'); %>
+</div>
+
+<%- include('../entries/js_main'); %>
+<script type="text/javascript">
+    run("paraphrase", false, "pos theme-bg", "~");
+    run("extension", false, "pos2 theme-border", "~");
+</script>
+{{/Has_Recite}}
+{{^Has_Recite}}
+{{Has_Recite}}
+{{/Has_Recite}}

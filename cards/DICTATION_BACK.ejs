@@ -1,0 +1,19 @@
+<div class="d">
+    <%- include('../entries/status_bar', {title: "DICTATION"}); %>
+    <%- include('../entries/pronunciation'); %>
+    <%- include('../entries/word'); %>
+    <br>
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    <%- include('../entries/paraphrase'); %>
+    <%- include('../entries/extension'); %>
+    <%- include('../entries/example'); %>
+</div>
+
+<%- include('../entries/js_main'); %>
+<script type="text/javascript">
+    run("paraphrase", true, "pos theme-bg", "{{text:Subject}}");
+    run("extension", true, "pos2 theme-border", "{{text:Subject}}");
+</script>
+<%- include('../entries/js_example'); %>

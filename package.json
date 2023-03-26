@@ -1,0 +1,10 @@
+{
+  "name": "MapleAnkiTemplate",
+  "version": "1.0.0",
+  "dependencies": {
+    "ejs": "^3.1.9"
+  },
+  "scripts": {
+    "generate": "node render.js"
+  }
+}

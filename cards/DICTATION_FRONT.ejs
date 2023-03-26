@@ -1,0 +1,19 @@
+{{#Has_Dictation}}
+<div class="d">
+    {{#Pronunciation}}
+    <%- include('../entries/status_bar', {title: "DICTATION"}); %>
+    <%- include('../entries/pronunciation'); %>
+    <%- include('../entries/paraphrase'); %>
+    <%- include('../entries/hint'); %>
+    <%- include('../entries/word'); %>
+    {{/Pronunciation}}
+</div>
+
+<%- include('../entries/js_main'); %>
+<script type="text/javascript">
+    run("paraphrase", true, "pos theme-bg", "~");
+</script>
+{{/Has_Dictation}}
+{{^Has_Dictation}}
+{{Has_Dictation}}
+{{/Has_Dictation}}

@@ -1,0 +1,79 @@
+<div class="f">
+    <%- include('../entries/status_bar', {title: "FILLING"}); %>
+
+    {{#Question}}
+    <br>
+    <div class="paraphrase theme-border-left">{{Question}}</div>
+    <%- include('../entries/js_main'); %>
+    <script type="text/javascript">
+        run("paraphrase", false, "pos theme-bg", "~");
+    </script>
+    {{/Question}}
+
+    <%- include('../entries/hint'); %>
+
+    <br>
+    {{#Pronunciation_Front}}
+    <div>
+        <hr class="hr_short theme-bg"/>
+        <span class="play-button theme-bg">{{Pronunciation_Front}}</span>
+        <hr class="hr_short theme-bg"/>
+    </div>
+    {{/Pronunciation_Front}}
+    {{^Pronunciation_Front}}
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    {{/Pronunciation_Front}}
+
+    <br>
+    <div><span id="answer" class="word">{{type:Answer}}</span>
+    </div>
+
+    <br>
+    <div id="keyboard">{{Keyboard}}</div>
+</div>
+<script type="text/javascript">
+
+    function buttonInput(cursorOffest) {
+        var typeans = document.getElementById("typeans");
+        var e = window.event || test.caller.arguments[0];
+        var el = e.target || e.srcElement;
+        var oldSS = typeans.selectionStart;
+        typeans.value = typeans.value.slice(0, typeans.selectionStart) + el.innerHTML + typeans.value.slice(typeans.selectionEnd);
+        typeans.selectionStart = oldSS + el.innerHTML.length;
+        typeans.selectionStart += cursorOffest;
+        typeans.selectionEnd = typeans.selectionStart;
+        typeans.focus();
+    }
+
+    function processKeyboard(HTML) {
+        if (HTML == "") {
+            return "";
+        }
+        lines = HTML.split(";");
+        S = ""
+        for (i in lines) {
+            S += "<div>"
+            buttons = lines[i].split(",");
+            for (j in buttons) {
+                button = buttons[j];
+                S += "<button class=\"typebutton light-f theme-f\" onclick=\"buttonInput("
+                if (button[button.length - 1] == "`") {
+                    S += "-1";
+                    button = button.slice(0, -1);
+                } else {
+                    S += "0";
+                }
+                S += ")\">" + button + "</button>";
+            }
+            S += "</div>"
+        }
+        return S;
+    }
+
+    keyboard = document.getElementById("keyboard");
+    if (keyboard) {
+        keyboard.innerHTML = processKeyboard(keyboard.innerHTML.replace(/(\&nbsp\;)/g, "\ "));
+    }
+</script>

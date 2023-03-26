@@ -1,0 +1,106 @@
+<div class="s">
+    <div class="status-bar theme-fg theme-bg">SPELLING</div>
+    {{#Paraphrase}}
+<br>
+<div class="paraphrase theme-border-left" id="paraphrase">{{Paraphrase}}</div>
+{{/Paraphrase}}
+    <br>
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    <br>
+<div><span class="word">{{type:Subject}}</span></div>
+    <br>
+{{#Pronunciation}}
+<div>
+    <hr class="hr_short theme-bg"/>
+    <span class="play-button theme-bg">{{Pronunciation}}</span>
+    <hr class="hr_short theme-bg"/>
+</div>
+{{/Pronunciation}}
+{{^Pronunciation}}
+<div>
+    <hr class="hr_long theme-bg"/>
+</div>
+{{/Pronunciation}}
+    {{#Extension}}
+<br>
+<div class="extension theme-border-left" id="extension">{{Extension}}</div>
+{{/Extension}}
+    {{#Example}}
+<br> <div class="example" id="example">{{Example}}</div>
+{{/Example}}
+</div>
+
+<script type="text/javascript">
+
+    /**
+     * Process parts of speech, colon highlight and colon masking
+     * @param s          the line to be processed
+     * @param full       true if colon masking is disabled
+     * @param pos_class  class of parts of speech
+     * @returns string
+     */
+    function proc(s, full, pos_class) {
+        let ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
+        let r = "";
+        let x = s.indexOf(":");
+        if (x !== -1) {
+            r = "<b>" + proc(s.substring(0, x), true, pos_class) + ":</b>";  // colon highlight
+            if (full) r += s.substring(x + 1);  // colon masking
+            return r;
+        }
+        for (let i in ts) {
+            let t = ts[i] + ".";
+            if (s.startsWith(t)) {
+                r = "<h class=\"" + pos_class + "\">" + t + "</h>";  // tag
+                if (s.substring(t.length, t.length + 5) === "&amp;") {  // there are more tags to process
+                    r += proc(s.substring(t.length + 5), full, pos_class);
+                } else {
+                    if (full) r += s.substring(t.length);
+                }
+                return r;
+            }
+        }
+        if (full) return s;
+        return r;
+    }
+
+    /**
+     * Process parts of speech, colon highlight, colon masking (if full == false), ~ replacement and html fix
+     * @param elem       id of DOM element to process
+     * @param full       true if colon masking is disabled
+     * @param pos_class  class of parts of speech
+     * @param word       word to replace "~"
+     * @returns none
+     */
+    function run(elem, full, pos_class, word) {
+        elem = document.getElementById(elem);
+        if (elem) {
+            let ps = ("<div>" + elem.innerHTML + "</div>")
+                .replace(/(&nbsp;)/g, "\ ")    // fix html
+                .replace(/(\u00A0)/g, "<br>")  // fix html
+                .replace(/~/g, word)  // "~" replacement
+                .match(/(<\/?div>|<br>).+?(?=<\/?div>|<br>)/g);  // get lines out of html
+            let r = "";
+            for (let i in ps) {
+                r += "<div>" + proc(ps[i].replace(/<\/?div>|<br>/g, "").trim(), full, pos_class) + "</div>"
+            }
+            elem.innerHTML = r
+        }
+    }
+</script>
+<script type="text/javascript">
+    run("paraphrase", true, "pos theme-bg", "{{text:Subject}}");
+    run("extension", true, "pos2 theme-border", "{{text:Subject}}");
+</script>
+<script type="text/javascript">
+    P = document.getElementById("example");
+    if (P) {
+        P.innerHTML = P.innerHTML
+            .replace(/(\&nbsp\;)/g, "\ ")
+            .replace(/(\u00A0)/g, "<br>")
+            .replace(/(\.\<br\>)/g,"\. ")
+            .replace(/(\b{{text:Subject}}\w*?\b)/ig, "<b>$1</b>"); /* Auto Bold */
+    }
+</script>

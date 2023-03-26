@@ -1,0 +1,19 @@
+<div class="s">
+    <%- include('../entries/status_bar', {title: "SPELLING"}); %>
+    <%- include('../entries/paraphrase'); %>
+    <br>
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    <%- include('../entries/word'); %>
+    <%- include('../entries/pronunciation'); %>
+    <%- include('../entries/extension'); %>
+    <%- include('../entries/example'); %>
+</div>
+
+<%- include('../entries/js_main'); %>
+<script type="text/javascript">
+    run("paraphrase", true, "pos theme-bg", "{{text:Subject}}");
+    run("extension", true, "pos2 theme-border", "{{text:Subject}}");
+</script>
+<%- include('../entries/js_example'); %>

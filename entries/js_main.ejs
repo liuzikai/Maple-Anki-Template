@@ -1,0 +1,58 @@
+<script type="text/javascript">
+
+    /**
+     * Process parts of speech, colon highlight and colon masking
+     * @param s          the line to be processed
+     * @param full       true if colon masking is disabled
+     * @param pos_class  class of parts of speech
+     * @returns string
+     */
+    function proc(s, full, pos_class) {
+        let ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
+        let r = "";
+        let x = s.indexOf(":");
+        if (x !== -1) {
+            r = "<b>" + proc(s.substring(0, x), true, pos_class) + ":</b>";  // colon highlight
+            if (full) r += s.substring(x + 1);  // colon masking
+            return r;
+        }
+        for (let i in ts) {
+            let t = ts[i] + ".";
+            if (s.startsWith(t)) {
+                r = "<h class=\"" + pos_class + "\">" + t + "</h>";  // tag
+                if (s.substring(t.length, t.length + 5) === "&amp;") {  // there are more tags to process
+                    r += proc(s.substring(t.length + 5), full, pos_class);
+                } else {
+                    if (full) r += s.substring(t.length);
+                }
+                return r;
+            }
+        }
+        if (full) return s;
+        return r;
+    }
+
+    /**
+     * Process parts of speech, colon highlight, colon masking (if full == false), ~ replacement and html fix
+     * @param elem       id of DOM element to process
+     * @param full       true if colon masking is disabled
+     * @param pos_class  class of parts of speech
+     * @param word       word to replace "~"
+     * @returns none
+     */
+    function run(elem, full, pos_class, word) {
+        elem = document.getElementById(elem);
+        if (elem) {
+            let ps = ("<div>" + elem.innerHTML + "</div>")
+                .replace(/(&nbsp;)/g, "\ ")    // fix html
+                .replace(/(\u00A0)/g, "<br>")  // fix html
+                .replace(/~/g, word)  // "~" replacement
+                .match(/(<\/?div>|<br>).+?(?=<\/?div>|<br>)/g);  // get lines out of html
+            let r = "";
+            for (let i in ps) {
+                r += "<div>" + proc(ps[i].replace(/<\/?div>|<br>/g, "").trim(), full, pos_class) + "</div>"
+            }
+            elem.innerHTML = r
+        }
+    }
+</script>

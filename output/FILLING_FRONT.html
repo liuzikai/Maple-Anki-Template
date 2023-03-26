@@ -1,0 +1,139 @@
+<div class="f">
+    <div class="status-bar theme-fg theme-bg">FILLING</div>
+
+    {{#Question}}
+    <br>
+    <div class="paraphrase theme-border-left">{{Question}}</div>
+    <script type="text/javascript">
+
+    /**
+     * Process parts of speech, colon highlight and colon masking
+     * @param s          the line to be processed
+     * @param full       true if colon masking is disabled
+     * @param pos_class  class of parts of speech
+     * @returns string
+     */
+    function proc(s, full, pos_class) {
+        let ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
+        let r = "";
+        let x = s.indexOf(":");
+        if (x !== -1) {
+            r = "<b>" + proc(s.substring(0, x), true, pos_class) + ":</b>";  // colon highlight
+            if (full) r += s.substring(x + 1);  // colon masking
+            return r;
+        }
+        for (let i in ts) {
+            let t = ts[i] + ".";
+            if (s.startsWith(t)) {
+                r = "<h class=\"" + pos_class + "\">" + t + "</h>";  // tag
+                if (s.substring(t.length, t.length + 5) === "&amp;") {  // there are more tags to process
+                    r += proc(s.substring(t.length + 5), full, pos_class);
+                } else {
+                    if (full) r += s.substring(t.length);
+                }
+                return r;
+            }
+        }
+        if (full) return s;
+        return r;
+    }
+
+    /**
+     * Process parts of speech, colon highlight, colon masking (if full == false), ~ replacement and html fix
+     * @param elem       id of DOM element to process
+     * @param full       true if colon masking is disabled
+     * @param pos_class  class of parts of speech
+     * @param word       word to replace "~"
+     * @returns none
+     */
+    function run(elem, full, pos_class, word) {
+        elem = document.getElementById(elem);
+        if (elem) {
+            let ps = ("<div>" + elem.innerHTML + "</div>")
+                .replace(/(&nbsp;)/g, "\ ")    // fix html
+                .replace(/(\u00A0)/g, "<br>")  // fix html
+                .replace(/~/g, word)  // "~" replacement
+                .match(/(<\/?div>|<br>).+?(?=<\/?div>|<br>)/g);  // get lines out of html
+            let r = "";
+            for (let i in ps) {
+                r += "<div>" + proc(ps[i].replace(/<\/?div>|<br>/g, "").trim(), full, pos_class) + "</div>"
+            }
+            elem.innerHTML = r
+        }
+    }
+</script>
+    <script type="text/javascript">
+        run("paraphrase", false, "pos theme-bg", "~");
+    </script>
+    {{/Question}}
+
+    {{#Hint}}
+<br>
+<div class="my-hint theme-border-left"><b>Hint: </b>{{Hint}}</div>
+{{/Hint}}
+
+    <br>
+    {{#Pronunciation_Front}}
+    <div>
+        <hr class="hr_short theme-bg"/>
+        <span class="play-button theme-bg">{{Pronunciation_Front}}</span>
+        <hr class="hr_short theme-bg"/>
+    </div>
+    {{/Pronunciation_Front}}
+    {{^Pronunciation_Front}}
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    {{/Pronunciation_Front}}
+
+    <br>
+    <div><span id="answer" class="word">{{type:Answer}}</span>
+    </div>
+
+    <br>
+    <div id="keyboard">{{Keyboard}}</div>
+</div>
+<script type="text/javascript">
+
+    function buttonInput(cursorOffest) {
+        var typeans = document.getElementById("typeans");
+        var e = window.event || test.caller.arguments[0];
+        var el = e.target || e.srcElement;
+        var oldSS = typeans.selectionStart;
+        typeans.value = typeans.value.slice(0, typeans.selectionStart) + el.innerHTML + typeans.value.slice(typeans.selectionEnd);
+        typeans.selectionStart = oldSS + el.innerHTML.length;
+        typeans.selectionStart += cursorOffest;
+        typeans.selectionEnd = typeans.selectionStart;
+        typeans.focus();
+    }
+
+    function processKeyboard(HTML) {
+        if (HTML == "") {
+            return "";
+        }
+        lines = HTML.split(";");
+        S = ""
+        for (i in lines) {
+            S += "<div>"
+            buttons = lines[i].split(",");
+            for (j in buttons) {
+                button = buttons[j];
+                S += "<button class=\"typebutton light-f theme-f\" onclick=\"buttonInput("
+                if (button[button.length - 1] == "`") {
+                    S += "-1";
+                    button = button.slice(0, -1);
+                } else {
+                    S += "0";
+                }
+                S += ")\">" + button + "</button>";
+            }
+            S += "</div>"
+        }
+        return S;
+    }
+
+    keyboard = document.getElementById("keyboard");
+    if (keyboard) {
+        keyboard.innerHTML = processKeyboard(keyboard.innerHTML.replace(/(\&nbsp\;)/g, "\ "));
+    }
+</script>

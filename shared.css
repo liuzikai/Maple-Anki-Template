@@ -1,0 +1,390 @@
+.card {
+    font-family: Helvetica Neue;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
+
+.mac .card {
+    font-size: 16px;
+}
+
+.mobile .card {
+    font-size: 10px;
+}
+
+:root {
+    --recite-color: #338ECA;
+    --recite-light: #b7d5eb;
+    --spelling-color: #56a844;
+    --spelling-light: #c1e7b8;
+    --dictation-color: #ec6c4f;
+    --dictation-light: #f7c4b8;
+    --filling-color: #66CDAA;
+    --filling-light: #E0FFFF;
+
+    --night-light: white;
+}
+
+/* Top Status Bar */
+.status-bar {
+    letter-spacing: 5px;
+    text-align: center;
+    border: 0;
+    border-radius: 30px;
+}
+
+.mac .status-bar {
+    font: 600 18px/35px times;
+}
+
+.mobile .status-bar {
+    font: 400 15px/28px times;
+}
+
+
+/* Theme Background Colors */
+.r .theme-bg {
+    background-color: var(--recite-color);
+}
+
+.s .theme-bg {
+    background-color: var(--spelling-color);
+}
+
+.d .theme-bg {
+    background-color: var(--dictation-color);
+}
+
+.f .theme-bg {
+    background-color: var(--filling-color);
+}
+
+/* Theme Foreground Colors */
+.r .theme-fg {
+    color: var(--recite-light);
+}
+
+.s .theme-fg {
+    color: var(--spelling-light);
+}
+
+.d .theme-fg {
+    color: var(--dictation-light);
+}
+
+.f .theme-fg {
+    color: var(--filling-light);
+}
+
+.nightMode .theme-fg {
+    color: var(--night-light);
+}
+
+/* Theme Boarder Colors */
+.r .theme-border {
+    border-color: var(--recite-color);
+}
+
+.s .theme-border {
+    border-color: var(--spelling-color);
+}
+
+.d .theme-border {
+    border-color: var(--dictation-color);
+}
+
+.f .theme-border {
+    border-color: var(--filling-color);
+}
+
+/* Theme of Left Border */
+.r .theme-border-left {
+    border-left: 3px solid var(--recite-color);
+}
+
+.s .theme-border-left {
+    border-left: 3px solid var(--spelling-color);
+}
+
+.d .theme-border-left {
+    border-left: 3px solid var(--dictation-color);
+}
+
+.f .theme-border-left {
+    border-left: 3px solid var(--filling-color);
+}
+
+/* Subject */
+.subject {
+    font-family: Helvetica Neue;
+    font-size: 28px;
+}
+
+/* Division Lines */
+.mac .hr_short {
+    width: 39%;
+    margin: 3px 7px;
+}
+
+.mobile .hr_short {
+    width: 39%;
+    margin: 2px 2px;
+}
+
+.hr_long {
+    width: 87%;
+}
+
+/* Override the style of hr */
+hr {
+    height: 2px;
+    border-radius: 3px;
+    border: 0 solid #F5F5F5;
+    display: inline-block;
+}
+
+
+/* Audio Buttons */
+.play-button {
+    border-radius: 3px;
+    cursor: pointer;
+    height: 26px;
+    width: 26px;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Adjust button provided by Anki */
+.replay-button {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    border: none;
+    display: inline-block;
+}
+
+.mobile .replay-button {
+    margin-top: 4px;
+}
+
+.replay-button svg {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.replay-button svg circle {
+    display: none;
+}
+
+/* Style of Part of Speech in Paraphrase */
+.mac .pos {
+    font: 18px Helvetica Neue;
+    color: #FFF;
+    padding: 2px 4px 3px 4px;
+    margin: 0px 3px;
+    border-radius: 2px;
+}
+
+.mobile .pos {
+    font: 16px Helvetica Neue;
+    color: #FFF;
+    padding: 0px 2px 1px 4px;
+    margin: 0px 5px;
+    border-radius: 2px;
+}
+
+/* Style of Part of Speech in Extension */
+.mac .pos2 {
+    font: 16px Helvetica Neue;
+    padding: 2px 4px 3px 4px;
+    margin: 0px 3px;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.mobile .pos2 {
+    font: 16px Helvetica Neue;
+    padding: 0px 2px 1px 4px;
+    margin: 0px 5px;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/* Style of Paraphrase */
+.mac .paraphrase {
+    font: 20px/190% Helvetica Neue;
+    text-align: left;
+    margin-left: 0em;
+    padding: 0.1em 0em 0.1em 0.5em;
+}
+
+.mobile .paraphrase {
+    font: 18px/190% Helvetica Neue;
+    text-align: left;
+    margin-left: 0em;
+    padding: 0.3em 0em 0.3em 0.5em;
+}
+
+/* Style of Example */
+.mac .example {
+    font: 18px/150% Helvetica Neue;
+    text-align: left;
+    padding: 0.5em;
+    margin-left: 0.2em;
+}
+
+.mobile .example {
+    font: 16px/120% Helvetica Neue;
+    text-align: left;
+    padding: 0.5em;
+    margin-left: 0.2em;
+}
+
+.r .example {
+    color: #222;
+    background-color: #E9EFF2;
+}
+
+.s .example {
+    color: #222;
+    background-color: #E9F4E7;
+}
+
+.d .example {
+    color: #222;
+    background-color: #F8EEEC;
+}
+
+.f .example {
+    color: #222;
+    background-color: #DFFFEB;
+}
+
+.nightMode .example {
+    color: var(--night-light);
+    background-color: #363636;
+}
+
+/* Style of Hint Component in Card */
+.my-hint {
+    text-align: left;
+    margin-left: 0em;
+    padding: 0.3em 0em 0.3em 1em;
+}
+
+.mac .my-hint {
+    font: 16px/18px Helvetica Neue;
+}
+
+.mobile .my-hint {
+    font: 14px/22px Helvetica Neue;
+}
+
+/* Overwrite Style of Hint of Anki */
+.hint {
+    text-align: left;
+    text-indent: 0em;
+    color: #333333;
+    line-height: 20px;
+    padding: 0.3em 0em 0.3em 0.5em;
+    display: inline;
+}
+
+.nightMode .hint {
+    color: #CCCCCC;
+}
+
+.mac .hint {
+    font: 18px/25px Helvetica Neue;
+}
+
+.mobile .hint {
+    font: 14px/20px Helvetica Neue;
+}
+
+
+/* Style of Extension */
+.mac .extension {
+    font: 18px/190% Helvetica Neue;
+    text-align: left;
+    margin-left: 0em;
+    padding: 0.1em 0em 0.1em 0.5em;
+}
+
+.mobile .extension {
+    font: 16px/190% Helvetica Neue;
+    text-align: left;
+    margin-left: 0em;
+    padding: 0.3em 0em 0.3em 0.5em;
+}
+
+/* Style of Spelling Word */
+.word {
+    font: 20px/35px Helvetica Neue;
+    letter-spacing: 1px;
+}
+
+.nightMode .word {
+    color: white;
+    background-color: black;
+}
+
+.nightMode input { /* Override input text style */
+    color: white;
+    background-color: #363636;
+    border: none;
+    padding: 5px 7px 5px 7px;
+}
+
+.typeGood {
+    border: 2px solid var(--spelling-color);
+    border-radius: 0px;
+    font: 28px/30px times;
+    background-color: var(--spelling-color);
+    text-align: center;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    color: white;
+    padding: 0px 0px 1px 0px;
+}
+
+.typeMissed {
+    border: 2px solid var(--dictation-color);
+    border-radius: 0px;
+    font: 28px/30px times;
+    background-color: var(--dictation-color);
+    text-align: center;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    color: white;
+    padding: 0px 0px 1px 0px;
+}
+
+.typeBad {
+    border: 2px solid #728d98;
+    border-radius: 0px;
+    font: 28px/30px times;
+    background-color: #728d98;
+    text-align: center;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    color: white;
+    padding: 0px 0px 1px 0px;
+}
+
+.mac .typebutton {
+    border-radius: 3px;
+    border: none;
+    padding: 5px 7px 5px 7px;
+    margin: 3px 3px;
+    font-family: 'Helvetica Neue';
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+}

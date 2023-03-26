@@ -1,0 +1,20 @@
+{{#Has_Spelling}}
+<div class="s">
+    <%- include('../entries/status_bar', {title: "SPELLING"}); %>
+    <%- include('../entries/paraphrase'); %>
+    <%- include('../entries/hint'); %>
+    <br>
+    <div>
+        <hr class="hr_long theme-bg"/>
+    </div>
+    <%- include('../entries/word'); %>
+</div>
+
+<%- include('../entries/js_main'); %>
+<script type="text/javascript">
+    run("paraphrase", true, "pos theme-bg", "~");
+</script>
+{{/Has_Spelling}}
+{{^Has_Spelling}}
+{{Has_Spelling}}
+{{/Has_Spelling}}
