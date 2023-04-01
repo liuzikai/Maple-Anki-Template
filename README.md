@@ -11,6 +11,7 @@ Maple Anki Template
 * Built-in support for audio
 * Built-in support for parts of speech (POS)
 * Built-in support for auto highlighting in examples
+* Light and dark modes supported
 
 ## Getting Started
 Go ahead and load the sample deck: [MapleTemplate.apkg](MapleTemplate.apkg). Enjoy!
