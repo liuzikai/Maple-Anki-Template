@@ -1,8 +1,6 @@
 Maple Anki Template
 ===================
 
-## Overview
-
 ![Sample](doc/sample.png)
 
 * Three main types of cards: Recite, Spelling, and Dictation, with flexible combinations
