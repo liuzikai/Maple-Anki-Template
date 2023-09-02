@@ -45,16 +45,16 @@
      * @returns string
      */
     function proc(s, full, pos_class) {
-        let ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
-        let r = "";
-        let x = s.indexOf(":");
+        var ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
+        var r = "";
+        var x = s.indexOf(":");
         if (x !== -1) {
             r = "<b>" + proc(s.substring(0, x), true, pos_class) + ":</b>";  // colon highlight
             if (full) r += s.substring(x + 1);  // colon masking
             return r;
         }
-        for (let i in ts) {
-            let t = ts[i] + ".";
+        for (var i in ts) {
+            var t = ts[i] + ".";
             if (s.startsWith(t)) {
                 r = "<h class=\"" + pos_class + "\">" + t + "</h>";  // tag
                 if (s.substring(t.length, t.length + 5) === "&amp;") {  // there are more tags to process
@@ -80,13 +80,13 @@
     function run(elem, full, pos_class, word) {
         elem = document.getElementById(elem);
         if (elem) {
-            let ps = ("<div>" + elem.innerHTML + "</div>")
+            var ps = ("<div>" + elem.innerHTML + "</div>")
                 .replace(/(&nbsp;)/g, "\ ")    // fix html
                 .replace(/(\u00A0)/g, "<br>")  // fix html
                 .replace(/~/g, word)  // "~" replacement
                 .match(/(<\/?div>|<br>).+?(?=<\/?div>|<br>)/g);  // get lines out of html
-            let r = "";
-            for (let i in ps) {
+            var r = "";
+            for (var i in ps) {
                 r += "<div>" + proc(ps[i].replace(/<\/?div>|<br>/g, "").trim(), full, pos_class) + "</div>"
             }
             elem.innerHTML = r
@@ -98,50 +98,55 @@
     run("extension", false, "pos2 theme-border", "~");
 </script>
 <script type="text/javascript">
-    const MAX_LENGTH = 30;
+    var MAX_LENGTH = 30;
+
+    var elem = document.getElementById("subjectInExample");
 
     function truncateFront(str) {
-        if (str.length <= MAX_LENGTH) return str;
+        if (!str.endsWith(" ") && elem.closest(".mobile")) {
+            str = str + "-";
+        }
+        if (str.length <= MAX_LENGTH) return str.replaceAll(" ", "&nbsp;");
 
-        let words = str.split(' ');
-        let truncated = words.pop();
-        let nextWord = words.length > 0 ? words[words.length - 1] : "";
+        var words = str.split(' ');
+        var truncated = words.pop();
+        var nextWord = words.length > 0 ? words[words.length - 1] : "";
 
         while (words.length > 0 && (`... ${nextWord} ${truncated}`).length <= MAX_LENGTH) {
             truncated = `${words.pop()} ${truncated}`;
             nextWord = words.length > 0 ? words[words.length - 1] : "";
         }
 
-        return `... ${truncated}`;
+        return `... ${truncated}`.replaceAll(" ", "&nbsp;");
     }
 
     function truncateBack(str) {
-        if (str.length <= MAX_LENGTH) return str;
+        if (!str.startsWith(" ") && elem.closest(".mobile")) {
+            str = "-" + str;
+        }
+        if (str.length <= MAX_LENGTH) return str.replaceAll(" ", "&nbsp;");
 
-        let words = str.split(' ');
-        let truncated = words.shift();
-        let nextWord = words.length > 0 ? words[0] : "";
+        var words = str.split(' ');
+        var truncated = words.shift();
+        var nextWord = words.length > 0 ? words[0] : "";
 
         while (words.length > 0 && (`${truncated} ${nextWord} ...`).length <= MAX_LENGTH) {
             truncated = `${truncated} ${words.shift()}`;
             nextWord = words.length > 0 ? words[0] : "";
         }
 
-        return `${truncated} ...`;
+        return `${truncated} ...`.replaceAll(" ", "&nbsp;");
     }
-</script>
-<script type="text/javascript">
-    let elem = document.getElementById("subjectInExample");
 
     if (elem) {
-        let content = elem.innerHTML;
-        let regex = /^(.*)\b({{text:Subject}}\w*)\b(.*?)(?=(\w*<br>)|\n|$)/i;
-        let match = content.match(regex);
+        var content = elem.innerHTML;
+        var regex = /^(.*?)({{text:Subject}})(.*?)(?=(\w*<br>)|\n|$)/i;
+        var match = content.match(regex);
 
         if (match) {
-            let front = truncateFront(match[1]);
-            let subjectWord = match[2];
-            let back = truncateBack(match[3]);
+            var front = truncateFront(match[1]);
+            var subjectWord = match[2];
+            var back = truncateBack(match[3]);
 
             elem.innerHTML = `<span class="before-subject">${front}</span><span class="subject">${subjectWord}</span><span class="after-subject">${back}</span>`;
         }

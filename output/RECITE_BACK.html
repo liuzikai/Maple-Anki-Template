@@ -40,16 +40,16 @@
      * @returns string
      */
     function proc(s, full, pos_class) {
-        let ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
-        let r = "";
-        let x = s.indexOf(":");
+        var ts = ["a", "vi", "vt", "v", "art", "aux", "adj", "adv", "abbr", "ad", "int", "num", "conj", "prep", "pron", "cn", "un", "n", "suff", "pref", "p", "pl", "pp", "phrase", "mn", "fn", "nn"];
+        var r = "";
+        var x = s.indexOf(":");
         if (x !== -1) {
             r = "<b>" + proc(s.substring(0, x), true, pos_class) + ":</b>";  // colon highlight
             if (full) r += s.substring(x + 1);  // colon masking
             return r;
         }
-        for (let i in ts) {
-            let t = ts[i] + ".";
+        for (var i in ts) {
+            var t = ts[i] + ".";
             if (s.startsWith(t)) {
                 r = "<h class=\"" + pos_class + "\">" + t + "</h>";  // tag
                 if (s.substring(t.length, t.length + 5) === "&amp;") {  // there are more tags to process
@@ -75,13 +75,13 @@
     function run(elem, full, pos_class, word) {
         elem = document.getElementById(elem);
         if (elem) {
-            let ps = ("<div>" + elem.innerHTML + "</div>")
+            var ps = ("<div>" + elem.innerHTML + "</div>")
                 .replace(/(&nbsp;)/g, "\ ")    // fix html
                 .replace(/(\u00A0)/g, "<br>")  // fix html
                 .replace(/~/g, word)  // "~" replacement
                 .match(/(<\/?div>|<br>).+?(?=<\/?div>|<br>)/g);  // get lines out of html
-            let r = "";
-            for (let i in ps) {
+            var r = "";
+            for (var i in ps) {
                 r += "<div>" + proc(ps[i].replace(/<\/?div>|<br>/g, "").trim(), full, pos_class) + "</div>"
             }
             elem.innerHTML = r
@@ -93,7 +93,7 @@
     run("extension", true, "pos2 theme-border", "{{text:Subject}}");
 </script>
 <script type="text/javascript">
-    P = document.getElementById("example");
+    var P = document.getElementById("example");
     if (P) {
         P.innerHTML = P.innerHTML
             .replace(/(\&nbsp\;)/g, "\ ")
