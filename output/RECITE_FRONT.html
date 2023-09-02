@@ -1,8 +1,17 @@
 {{#Has_Recite}}
 <div class="r">
     <div class="status-bar theme-fg theme-bg">RECITE</div>
-    <br>
+<br>
+    {{#Example}}
+        <br>
+<div id="subjectInExample">{{Example}}</div>
+<br>
+    {{/Example}}
+    {{^Example}}
+        <br>
 <div class="subject">{{Subject}}</div>
+<br>
+    {{/Example}}
     <br>
 {{#Pronunciation}}
 <div>
@@ -87,6 +96,56 @@
 <script type="text/javascript">
     run("paraphrase", false, "pos theme-bg", "~");
     run("extension", false, "pos2 theme-border", "~");
+</script>
+<script type="text/javascript">
+    const MAX_LENGTH = 30;
+
+    function truncateFront(str) {
+        if (str.length <= MAX_LENGTH) return str;
+
+        let words = str.split(' ');
+        let truncated = words.pop();
+        let nextWord = words.length > 0 ? words[words.length - 1] : "";
+
+        while (words.length > 0 && (`... ${nextWord} ${truncated}`).length <= MAX_LENGTH) {
+            truncated = `${words.pop()} ${truncated}`;
+            nextWord = words.length > 0 ? words[words.length - 1] : "";
+        }
+
+        return `... ${truncated}`;
+    }
+
+    function truncateBack(str) {
+        if (str.length <= MAX_LENGTH) return str;
+
+        let words = str.split(' ');
+        let truncated = words.shift();
+        let nextWord = words.length > 0 ? words[0] : "";
+
+        while (words.length > 0 && (`${truncated} ${nextWord} ...`).length <= MAX_LENGTH) {
+            truncated = `${truncated} ${words.shift()}`;
+            nextWord = words.length > 0 ? words[0] : "";
+        }
+
+        return `${truncated} ...`;
+    }
+</script>
+<script type="text/javascript">
+    let elem = document.getElementById("subjectInExample");
+
+    if (elem) {
+        let content = elem.innerHTML;
+        let regex = /^(.*)\b({{text:Subject}}\w*)\b(.*?)(?=(\w*<br>)|\n|$)/i;
+        let match = content.match(regex);
+
+        if (match) {
+            let front = truncateFront(match[1]);
+            let subjectWord = match[2];
+            let back = truncateBack(match[3]);
+
+            elem.innerHTML = `<span class="before-subject">${front}</span><span class="subject">${subjectWord}</span><span class="after-subject">${back}</span>`;
+        }
+    }
 </script>
 {{/Has_Recite}}
 {{^Has_Recite}}

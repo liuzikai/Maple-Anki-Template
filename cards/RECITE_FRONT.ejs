@@ -1,7 +1,12 @@
 {{#Has_Recite}}
 <div class="r">
     <%- include('../entries/status_bar', {title: "RECITE"}); %>
-    <%- include('../entries/subject'); %>
+    {{#Example}}
+        <%- include('../entries/subject_in_example'); %>
+    {{/Example}}
+    {{^Example}}
+        <%- include('../entries/subject'); %>
+    {{/Example}}
     <%- include('../entries/pronunciation'); %>
     <%- include('../entries/paraphrase'); %>
     <%- include('../entries/extension'); %>
@@ -12,6 +17,7 @@
     run("paraphrase", false, "pos theme-bg", "~");
     run("extension", false, "pos2 theme-border", "~");
 </script>
+<%- include('../entries/js_subject_in_example'); %>
 {{/Has_Recite}}
 {{^Has_Recite}}
 {{Has_Recite}}
