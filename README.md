@@ -1,8 +1,6 @@
 Maple Anki Template
 ===================
 
-## Overview
-
 ![Sample](doc/sample.png)
 
 * Three main types of cards: Recite, Spelling, and Dictation, with flexible combinations
@@ -32,7 +30,7 @@ Contributions for other platforms are welcomed!
 As there are multiple reused components in cards, templates are generated using EJS.
 ```shell
 npm install
-npm generate
+npm render
 ```
 
 Outputs are files in `output` directory plus shared.css.
