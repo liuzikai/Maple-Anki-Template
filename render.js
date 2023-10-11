@@ -31,3 +31,15 @@ fs.readdir(inputPath, function (err, files) {
 
     });
 });
+
+ejs.renderFile("test/js_subject_in_example_test.ejs", function (err, str) {
+    if (err) {
+        return console.error(err);
+    }
+    fs.writeFile("output/js_subject_in_example_test.js", str, function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        console.log("Generate js_subject_in_example_test.js")
+    });
+});

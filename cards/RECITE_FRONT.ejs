@@ -17,7 +17,13 @@
     run("paraphrase", false, "pos theme-bg", "~");
     run("extension", false, "pos2 theme-border", "~");
 </script>
-<%- include('../entries/js_subject_in_example'); %>
+<script type="text/javascript">
+    <%- include('../entries/js_subject_in_example.js'); %>
+    var elem = document.getElementById("subjectInExample");
+    if (elem) {
+        elem.innerHTML = processSubjectInExample("{{text:Subject}}", elem.innerHTML, elem.closest(".mobile"));
+    }
+</script>
 {{/Has_Recite}}
 {{^Has_Recite}}
 {{Has_Recite}}

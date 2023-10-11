@@ -131,22 +131,24 @@
 
 .before-subject {
     display: inline-block;
-    width: 250px;
+    width: 35vw;
     text-align: right;
 }
 
 .mobile .before-subject {
     text-align: left;
+    width: 90vw;
 }
 
 .after-subject {
     display: inline-block;
-    width: 250px;
+    width: 35vw;
     text-align: left;
 }
 
 .mobile .after-subject {
     text-align: right;
+    width: 90vw;
 }
 
 #subjectInExample {
