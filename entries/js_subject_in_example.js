@@ -40,9 +40,9 @@ function matchSubject(subject, content) {
     content = content.split('<br>')[0];
     var match = content.match(new RegExp(`^(.*?)<b>(${subject})</b>(.*?)$`, "i"));
     if (match) return match;
-    var match = content.match(new RegExp(`^(.*?)<span style=" *font-weight:.+;">(${subject})</span>(.*?)$`, "i"));
+    match = content.match(new RegExp(`^(.*?)<span style=" *font-weight:.+;">(${subject})</span>(.*?)$`, "i"));
     if (match) return match;
-    var match = content.match(new RegExp(`^(.*?)(${subject})(.*?)$`, "i"));
+    match = content.match(new RegExp(`^(.*?)(${subject})(.*?)$`, "i"));
     if (match) return match;
     return null;
 }
@@ -56,5 +56,5 @@ function processSubjectInExample(subject, content, isMobile) {
 
         return `<span class="before-subject">${front}</span><span class="subject">${subjectWord}</span><span class="after-subject">${back}</span>`;
     }
-    return content;
+    return `<span class="subject">${subject}</span>`;
 }

@@ -41,3 +41,11 @@ test('Start with the subject', (t) => {
     ), new RegExp('<span class="subject">Pedestrain</span><span class="after-subject">-s'));
 });
 
+test('No match', (t) => {
+    assert.match(processSubjectInExample(
+        'decadent',
+        'The empire had for years been falling into decadence.',
+        true
+    ), new RegExp('<span class="subject">decadent</span>'));
+});
+
