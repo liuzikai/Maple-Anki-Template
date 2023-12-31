@@ -1,12 +1,20 @@
 .card {
-    font-family: Helvetica Neue;
+    font-family: Helvetica Neue, sans-serif;
     text-align: center;
     color: black;
     background-color: white;
 }
 
-.mac .card {
+.card {
     font-size: 20px;
+}
+
+@media (min-width: 1200px) {
+    .card {
+        max-width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 .mobile .card {
@@ -34,7 +42,7 @@
     border-radius: 30px;
 }
 
-.mac .status-bar {
+.status-bar {
     font: 600 18px/35px times;
 }
 
@@ -98,7 +106,7 @@
     border-color: var(--filling-color);
 }
 
-/* Theme of Left Border */
+/* Theme of the left border */
 .r .theme-border-left {
     border-left: 3px solid var(--recite-color);
 }
@@ -117,7 +125,6 @@
 
 /* Subject */
 .subject {
-    font-family: Helvetica Neue;
     font-size: 28px;
 }
 
@@ -132,6 +139,7 @@
 .before-subject {
     display: inline-block;
     width: 35vw;
+    max-width: 358px;
     text-align: right;
 }
 
@@ -143,6 +151,7 @@
 .after-subject {
     display: inline-block;
     width: 35vw;
+    max-width: 358px;
     text-align: left;
 }
 
@@ -155,8 +164,8 @@
     color: grey;
 }
 
-/* Division Lines */
-.mac .hr_short {
+/* Division lines */
+.hr_short {
     width: 39%;
     margin: 3px 7px;
 }
@@ -179,7 +188,7 @@ hr {
 }
 
 
-/* Audio Buttons */
+/* Audio buttons */
 .play-button {
     border-radius: 3px;
     cursor: pointer;
@@ -215,8 +224,9 @@ hr {
 }
 
 /* Style of Part of Speech in Paraphrase */
-.mac .pos {
-    font: 18px Helvetica Neue;
+.pos {
+    font-size: 18px;
+    font-weight: normal;
     color: #FFF;
     padding: 2px 4px 3px 4px;
     margin: 0px 3px;
@@ -224,7 +234,8 @@ hr {
 }
 
 .mobile .pos {
-    font: 16px Helvetica Neue;
+    font-size: 16px;
+    font-weight: normal;
     color: #FFF;
     padding: 0px 2px 1px 4px;
     margin: 0px 5px;
@@ -232,8 +243,9 @@ hr {
 }
 
 /* Style of Part of Speech in Extension */
-.mac .pos2 {
-    font: 16px Helvetica Neue;
+.pos2 {
+    font-size: 16px;
+    font-weight: normal;
     padding: 2px 4px 3px 4px;
     margin: 0px 3px;
     border-radius: 2px;
@@ -242,7 +254,8 @@ hr {
 }
 
 .mobile .pos2 {
-    font: 16px Helvetica Neue;
+    font-size: 16px;
+    font-weight: normal;
     padding: 0px 2px 1px 4px;
     margin: 0px 5px;
     border-radius: 2px;
@@ -251,7 +264,7 @@ hr {
 }
 
 /* Style of Paraphrase */
-.mac .paraphrase {
+.paraphrase {
     font: 20px/190% Helvetica Neue;
     text-align: left;
     margin-left: 0em;
@@ -266,7 +279,7 @@ hr {
 }
 
 /* Style of Example */
-.mac .example {
+.example {
     font: 18px/150% Helvetica Neue;
     text-align: left;
     padding: 0.5em;
@@ -305,14 +318,14 @@ hr {
     background-color: #363636;
 }
 
-/* Style of Hint Component in Card */
+/* Style of the hint component */
 .my-hint {
     text-align: left;
     margin-left: 0em;
     padding: 0.3em 0em 0.3em 1em;
 }
 
-.mac .my-hint {
+.my-hint {
     font: 16px/18px Helvetica Neue;
 }
 
@@ -320,7 +333,7 @@ hr {
     font: 14px/22px Helvetica Neue;
 }
 
-/* Overwrite Style of Hint of Anki */
+/* Overwrite style of hint of Anki */
 .hint {
     text-align: left;
     text-indent: 0em;
@@ -334,7 +347,7 @@ hr {
     color: #CCCCCC;
 }
 
-.mac .hint {
+.hint {
     font: 18px/25px Helvetica Neue;
 }
 
@@ -344,7 +357,7 @@ hr {
 
 
 /* Style of Extension */
-.mac .extension {
+.extension {
     font: 18px/190% Helvetica Neue;
     text-align: left;
     margin-left: 0em;
@@ -412,12 +425,11 @@ hr {
     padding: 0px 0px 1px 0px;
 }
 
-.mac .typebutton {
+.typebutton {
     border-radius: 3px;
     border: none;
     padding: 5px 7px 5px 7px;
     margin: 3px 3px;
-    font-family: 'Helvetica Neue';
     font-size: 16px;
     color: #fff;
     cursor: pointer;
