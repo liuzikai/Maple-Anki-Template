@@ -138,11 +138,11 @@ function truncateBack(str, isMobile) {
 
 function matchSubject(subject, content) {
     content = content.split('<br>')[0];
-    var match = content.match(new RegExp(`^(.*?)<b>(${subject})</b>(.*?)$`, "i"));
+    var match = content.match(new RegExp(`^(.*?)<b>(${subject})([a-zA-Z]*?)</b>(.*?)$`, "i"));
     if (match) return match;
-    match = content.match(new RegExp(`^(.*?)<span style=" *font-weight:.+;">(${subject})</span>(.*?)$`, "i"));
+    match = content.match(new RegExp(`^(.*?)<span style=" *font-weight:.+;">(${subject})([a-zA-Z]*?)</span>(.*?)$`, "i"));
     if (match) return match;
-    match = content.match(new RegExp(`^(.*?)(${subject})(.*?)$`, "i"));
+    match = content.match(new RegExp(`^(.*?)(${subject})()(.*?)$`, "i"));
     if (match) return match;
     return null;
 }
@@ -152,7 +152,7 @@ function processSubjectInExample(subject, content, isMobile) {
     if (match) {
         var front = truncateFront(match[1], isMobile);
         var subjectWord = match[2];
-        var back = truncateBack(match[3], isMobile);
+        var back = truncateBack(match[3] + match[4], isMobile);
 
         return `<span class="before-subject">${front}</span><span class="subject">${subjectWord}</span><span class="after-subject">${back}</span>`;
     }

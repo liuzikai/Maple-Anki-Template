@@ -9,6 +9,14 @@ test('<b> wrapper', (t) => {
     ), new RegExp('</span><span class="subject">contraptions</span><span class="after-subject">'));
 });
 
+test('<b> partial wrapper', (t) => {
+    assert.match(processSubjectInExample(
+        'contraption',
+        'He turned his parents’ garage into a laboratory, rigged electrical <b>contraptions</b> around the house.',
+        false
+    ), new RegExp('</span><span class="subject">contraption</span><span class="after-subject">s'));
+});
+
 test('<br> splitting', (t) => {
     assert.match(processSubjectInExample(
         'palliative',
